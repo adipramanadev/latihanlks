@@ -84,9 +84,23 @@ class FormsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Forms $forms)
+    public function update(Request $request, $id)
     {
-        //
+        //get data by ID
+        $forms = Forms::find($id);
+        //dekalarasi dan save data nya
+        $forms->name = $request->name;
+        $forms->slug = $request->slug;
+        $forms->description = $request->description;
+        $forms->limit_one_response = $request->limit_one_response;
+
+        if ($forms->save()) {
+            return response()->json([
+                "message" => "Update form success",
+                "forms" => $forms
+            ]);
+
+        }
     }
 
     /**
