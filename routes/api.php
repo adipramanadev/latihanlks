@@ -26,5 +26,6 @@ Route::get('get-product', [ProductController::class, 'index']);
 
 //route group
 Route::group(['prefix' => '/v1'], function () {
-    Route::apiResource('forms', FormsController::class);
+    Route::get('forms', [FormsController::class, 'forms']);
+    Route::post('forms', [FormsController::class,'store']);
 });
