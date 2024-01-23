@@ -37,13 +37,14 @@ class FormsController extends Controller
      */
     public function store(Request $request)
     {
+        //ini untuk validasi form
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'limit_one_response' => 'required',
         ]);
-
+        //untuk menampilkan pesan error
         if ($validation->fails()) {
             return response()->json([
                 "message" => "Create form failed",
@@ -52,8 +53,10 @@ class FormsController extends Controller
 
         }
 
+        //deklarasi variabel
         $input = Forms::create($request->all());
 
+        //simpan data ke database
         if ($input) {
             return response()->json([
                 "message" => "Create form success",
